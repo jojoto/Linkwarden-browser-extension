@@ -142,9 +142,9 @@ const BookmarkForm = () => {
   const { handleSubmit, control } = form;
 
   useEffect(() => {
-    getCurrentTabInfo().then(({ url, title }) => {
+    getCurrentTabInfo().then(({ url, title, description}) => {
       form.setValue('url', url ? url : '');
-      form.setValue('description', title ? title : '');
+      form.setValue('description', description ? description : '');
       // Had to be done since, name isn't required but when syncing it is. If not it looks bad!.
       form.setValue('name', title ? title : '');
     });
@@ -325,6 +325,19 @@ const BookmarkForm = () => {
             name="collection"
             render={({ field }) => (
               <FormItem className={`my-2`}>
+                <FormField
+                  control={control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Google..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormLabel>Collection</FormLabel>
                 <div className="min-w-full inset-x-0">
                   <Popover
@@ -474,60 +487,7 @@ const BookmarkForm = () => {
                       </PopoverContent>
                     ) : undefined}
 
-                    {/* <PopoverContent
-                      className={`min-w-full p-0 overflow-y-auto ${
-                        !openOptions ? 'max-h-[100px]' : 'max-h-[200px]'
-                      }`}
-                    >
-                      <Command className="flex-grow min-w-full dropdown-content">
-                        <CommandInput
-                          className="min-w-[280px]"
-                          placeholder="Search collection..."
-                        />
-                        <CommandEmpty>No Collection found.</CommandEmpty>
-                        {Array.isArray(collections?.response) && (
-                          <CommandGroup className="w-full">
-                            {isLoading ? (
-                              <CommandItem
-                                value="Getting collections..."
-                                key="Getting collections..."
-                                onSelect={() => {
-                                  form.setValue('collection', {
-                                    name: 'Unorganized',
-                                  });
-                                  setOpenCollections(false);
-                                }}
-                              >
-                                Unorganized
-                              </CommandItem>
-                            ) : (
-                              collections.response?.map(
-                                (collection: {
-                                  name: string;
-                                  id: number;
-                                  ownerId: number;
-                                }) => (
-                                  <CommandItem
-                                    value={collection.name}
-                                    key={collection.id}
-                                    onSelect={() => {
-                                      form.setValue('collection', {
-                                        ownerId: collection.ownerId,
-                                        id: collection.id,
-                                        name: collection.name,
-                                      });
-                                      setOpenCollections(false);
-                                    }}
-                                  >
-                                    {collection.name}
-                                  </CommandItem>
-                                )
-                              )
-                            )}
-                          </CommandGroup>
-                        )}
-                      </Command>
-                    </PopoverContent> */}
+                    {}
                   </Popover>
                 </div>
                 <FormMessage />
@@ -565,20 +525,7 @@ const BookmarkForm = () => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
-              <FormField
-                control={control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Google..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              />              
               <FormField
                 control={control}
                 name="description"
