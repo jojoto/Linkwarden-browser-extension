@@ -1,12 +1,13 @@
 # Linkwarden Browser Extension
 
-Extension for [Linkwarden](https://github.com/linkwarden/linkwarden), a self-hosted, open-source collaborative bookmark
+Fork of the official extension for [Linkwarden](https://github.com/linkwarden/linkwarden), a self-hosted, open-source collaborative bookmark
 manager to
 collect, organize and archive webpages.
 
 **Features**
 
 - Add and organize new links to Linkwarden with a single click.
+- Automatically fill the description using the retrieved page metadata.
 
 ![Image](/assets/linkwarden-extension.png)
 
@@ -30,7 +31,7 @@ Firefox: [Mozilla Addon Store](https://addons.mozilla.org/en-US/firefox/addon/li
 Clone this repository by running the following in your terminal:
 
 ```
-git clone https://github.com/linkwarden/browser-extension.git
+git clone https://github.com/jojoto/Linkwarden-browser-extension.git
 ```
 
 ### Step 2: Build
